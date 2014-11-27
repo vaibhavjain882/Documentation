@@ -18,7 +18,7 @@ com2sec readonly        127.0.0.1 public
 
 Now save and exit and restart the snmp service.
 ```
-Verify the snmp connection by -
+Verify the snmp connection by :
 
 ```
 snmpwalk -v 1 -c YourCommunityString@IpOfDevice IP-MIB::ipAdEntIfIndex
