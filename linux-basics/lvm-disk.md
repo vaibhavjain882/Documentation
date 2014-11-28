@@ -47,14 +47,14 @@ lvdisplay
 Create filesystem and mount it:
 
 ```
-mkfs -t ext4 /dev/mapper/volume_group_name-logical_volume_name
+mkfs.ext4 /dev/mapper/volume_group_name-logical_volume_name
 mount /dev/mapper/volume_group_name-logical_volume_name /mountpoint
 
 ### Mount Point should be created.
 
-## Now, make an entry in /proc/mount file so that it will be mounted after reboot.
+## Now, make an entry in /etc/fstab file so that it will be mounted after reboot.
 
-/dev/mapper/volume_group_name-logical_volume_name /mountpoint ext4 rw,relatime,barrier=1,data=ordered 0 0
+/dev/mapper/volume_group_name-logical_volume_name /mountpoint ext4 deafults 0 0
 ```
 
  
