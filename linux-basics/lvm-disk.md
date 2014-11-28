@@ -6,19 +6,13 @@ Create new disk :
 fdisk -cu /dev/disk_name
 ```
 
-Add the disk to your machine as a primary partition. you can add lvm as extended 
-partition but it doesn't make any sense because lvm as primary partition is more
-
-manageable than any other extended partition. And basically lvm partition remove 
-our dependency on extended partition and provide more flexibility in terms of 
-
-manageability (increasing/decreasing the size of entire disk, addition/deletion 
-
+Add the disk to your machine as a primary partition. you can add lvm as extendedpartition but it doesn't make any sense because lvm as primary partition is more
+manageable than any other extended partition. And basically lvm partition remove
+our dependency on extended partition and provide more flexibility in terms of
+manageability (increasing/decreasing the size of entire disk, addition/deletion
 of other disks etc.).
 
-                Choose primary partition number from 1 to 4 and then partit
-
-ion type "8e" (which is for lvm) and also specify the size of the disk.
+Choose primary partition number from 1 to 4 and then partition type "8e" (which is for lvm) and also specify the size of the disk.
 
 Now, Create physical LVM volume on your disk:
 
