@@ -59,7 +59,56 @@ mount /dev/mapper/volume_group_name-logical_volume_name /mountpoint
 /dev/mapper/volume_group_name-logical_volume_name /mountpoint ext4 deafults 0 0
 ```
 
- 
+### Increase The Size Of Linux LVM In Virtul Machine
+
+After shutdown the system increase the disk size in VM then start it.
+
+Now perform foolowing steps:
+
+```
+fdisk -l  ## It will list the increased disk (most probably as /dev/sda)
+```
+
+```
+
+fdisk /dev/sda 
+
+Command (m for help): n
+
+Command action P
+
+Partition number (1-4): 3  ## as available
+
+First cylinder (2611-3916, default 2611): "enter"
+
+Last cylinder, +cylinders or +size{K,M,G} (2611-3916, default 3916): "enter"
+
+Command (m for help): t
+
+Partition number (1-5): 3
+
+Hex code (type L to list codes): 8e
+
+Command (m for help): w 
+```
+
+Now reboot the system or run "partx -a /dev/sda3" coomand. And then run the following commands:
+
+```
+ pvcreate /dev/sda3
+
+vgextend VG-Name-Of-Increasing-LV /dev/sda3  ## You can see VG name by 
+
+                                                "vgdisplay" command.
+
+lvextend /dev/VG-Name-Of-Increasing-LV/LV-Name-To-Be-Incrementing /dev/sda3
+
+resize2fs /dev/VG-Name-Of-Increasing-LV/LV-Name-To-Be-Incrementing
+
+```
+
+Now, all done. You can see your incremented Volume size by "lvdisplay" command.
+
 
 
 
