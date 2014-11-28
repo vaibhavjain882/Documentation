@@ -1,6 +1,8 @@
 ### Adding LVM Disk
 
-Create new disk :
+Add a disk to the machine and -
+
+Create new partition :
 
 ```
 fdisk -cu /dev/disk_name
@@ -12,7 +14,7 @@ our dependency on extended partition and provide more flexibility in terms of
 manageability (increasing/decreasing the size of entire disk, addition/deletion
 of other disks etc.).
 
-Choose primary partition number from 1 to 4 and then partition type "8e" (which is for lvm) and also specify the size of the disk.
+Now a command prompt appears. Press n and enter then press p and enter then choose primary partition number from 1 to 4 and enter. Now for first cylinder just press enter then specify the size by adding +"size" for last cylinder and enter then press t and enter then press 8e (for lvm) and enter then press w and enter.
 
 Now, Create physical LVM volume on your disk:
 
