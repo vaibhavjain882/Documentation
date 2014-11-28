@@ -17,7 +17,7 @@ yum update
 ```
 
 ```
-yum -y install php*
+yum -y install php
 ```
 
 ```
