@@ -14,7 +14,31 @@ our dependency on extended partition and provide more flexibility in terms of
 manageability (increasing/decreasing the size of entire disk, addition/deletion
 of other disks etc.).
 
-Now a command prompt appears. Press n and enter then press p and enter then choose primary partition number from 1 to 4 and enter. Now for first cylinder just press enter then specify the size by adding +"size" for last cylinder and enter then press t and enter then press 8e (for lvm) and enter then press w and enter.
+Now Follow below steps:
+
+```
+Command (m for help): n
+
+Command action P
+
+Partition number (1-4): 1  ## as available
+
+First cylinder (2611-3916, default 2611): "enter"
+
+Last cylinder, +cylinders or +size{K,M,G} (2611-3916, default 3916): +100G  ##de  
+                                                           fine size as desired.
+
+Command (m for help): t
+
+Partition number (1-5): 1
+
+Hex code (type L to list codes): 8e
+
+Command (m for help): w
+
+```
+
+
 
 Now, Create physical LVM volume on your disk:
 
