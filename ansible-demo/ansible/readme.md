@@ -39,5 +39,5 @@ ansible-playbook -i inventory/hosts -u "remote-user" --identity-file=/path/of/yo
 
 ```
 
-* You can give path of your private key and remote user name in ansible configuration but If you are working in a team you can not give one person private key and user name for all. So use above syntax.
+*  You can give path of your private key and remote user name in ansible configuration but If you are working in a team you can not give one person private key and user name for all. So use above syntax.
 
