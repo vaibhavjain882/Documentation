@@ -1,5 +1,5 @@
 ---
-```
+
 # Install Nginx
 
 - name: "Install packages"
@@ -16,4 +16,3 @@
   - "/etc/nginx/sites"
   - "/var/log/nginx"
 
-```

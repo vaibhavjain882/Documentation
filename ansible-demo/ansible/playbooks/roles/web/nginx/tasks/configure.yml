@@ -1,5 +1,5 @@
 ---
-```
+
 # Configure Nginx
 
 - name: "Configure Nginx"
@@ -23,4 +23,3 @@
   service: name=nginx enabled=yes
   sudo: yes
 
-```

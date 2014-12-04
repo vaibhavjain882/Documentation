@@ -1,8 +1,5 @@
 ---
-```
-# Nginx installation
 
 - include: install.yml
 - include: configure.yml
 
-```
