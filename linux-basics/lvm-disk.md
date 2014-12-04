@@ -131,7 +131,7 @@ resize2fs /dev/VG-Name-Of-Increasing-LV/LV-Name-To-Be-Incrementing
 
 ```
 
-Now, all done. You can see your incremented Volume size by "lvdisplay" command.
+Now,  all done. You can see your incremented Volume size by "lvdisplay" command.
 
 
 
