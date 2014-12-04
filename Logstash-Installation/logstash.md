@@ -314,7 +314,7 @@ to_json();
 
 > Now save and exit. 
 
-* Run services.msc and start the service nxlog.
+* Run services.msc and start the service nxlog .
 
 
 - - -
