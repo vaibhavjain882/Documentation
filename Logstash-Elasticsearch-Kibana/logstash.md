@@ -176,7 +176,7 @@ $DirCreateMode 0755
 
 ```
 $template FILENAME, "/logstash/%HOSTNAME%.log"
-*.* ?FILENAME 
+authpriv.* ?FILENAME 
 ```
 
 ```
@@ -199,8 +199,13 @@ vi /etc/logstash/conf.d/output.conf (Open this file and add following lines)-
 
 ```
 output {
-elasticsearch { host => "LogstashServerIP" }
-stdout { codec => rubydebug }
+elasticsearch {
+host => "logstash-server-ip"
+protocol => "http"
+codec => "json"
+flush_size => 10
+idle_flush_time => 1
+}
 }
 ```
 
