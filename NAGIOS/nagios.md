@@ -148,6 +148,9 @@ yum install nagios-plugins-all
 
 command[check_internet_link]=/usr/local/libexec/check_ping -H $ARG1$ -w $ARG2$ -c $ARG3$
 
+# In this nrpe.cfg find allowed_host=127.0.0.1 and edit it as foolowing
+
+allowed_host=127.0.0.1, "NagiosServerIP"
 ```
 
 #### service nrpe start at client.
