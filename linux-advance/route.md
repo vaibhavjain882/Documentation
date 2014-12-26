@@ -68,22 +68,22 @@ vi /etc/syscinfig/network
 
 Gateway="GatewayIp"
 
-# You can add additional static route for eth0, make a file in /etc/sysconfig/netwotk-scripts/ called route-eth0 and add following lines :
+# You can add additional static route for eth0, make a file in /etc/sysconfig/netwotk-scripts/ called route-eth0 and add following lines in gateway of 192.168.50.1 to access 192.168.60.0/24 network.:
 
 192.168.60.0/24 via 192.168.50.1
 
 # The above config sets static routing for network 191.168.60.0/24 via 192.168.50.1 router.
 
-# For all linux distributions, use following method
+# For all linux distributions, access 192.168.60.0/24 network use following method
 
 1. Go to vi /etc/rc.d/rc.local or /etc/rc.local
 2.Append following line
 /sbin/ip route add 192.168.60.0/24 dev eth0
 
-# In ubuntu system network file is /etc/network/interfaces. Append following line to this file:
+# In ubuntu system network file is /etc/network/interfaces. Append following line to access the 192.168.60.0/24 network from ubuntu 192.168.50.1 gateway.
 
-up route add -net 192.168.50.0 netmask 255.255.255.0 gw 192.168.50.1
-down route del -net 192.168.50.0 netmask 255.255.255.0 gw 192.168.50.1
+up route add -net 192.168.60.0 netmask 255.255.255.0 gw 192.168.50.1
+down route del -net 192.168.60.0 netmask 255.255.255.0 gw 192.168.50.1
 ```
 
 
