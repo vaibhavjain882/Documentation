@@ -86,4 +86,19 @@ up route add -net 192.168.60.0 netmask 255.255.255.0 gw 192.168.50.1
 down route del -net 192.168.60.0 netmask 255.255.255.0 gw 192.168.50.1
 ```
 
+#### Some example of ip route command.
 
+```
+# ip route add 10.23.30.0/24 via 192.168.8.50
+
+# ip route del 10.28.0.0/16 via 192.168.10.50 dev eth0
+
+# ip route chg default via 192.168.25.110 dev eth1
+
+# ip route get [ip_address] (shows the interface and gateway that would be used to reach a remote host. This command would be especially useful for troubleshooting routing issues on hosts with large routing tables and/or with multiple network interfaces).
+
+```
+
+Note: route is a fairly simple tool, perfect for creating static routes, it still present in many distributions for compatibility. ip route is much more powerful, it has much more functionality, and can create more specialized rules.
+
+ip route isn't needed to create a static route, but as it's a much more useful tool, the effort expended in learning it and its syntax is definitely time well spent.
