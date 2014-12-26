@@ -57,6 +57,19 @@ $ route add default gw "lease line ip"
 ```
 Now when you try to access the internet (for example: ping google.com) from any of these machines (for example, from 192.168.3.2), it will redirect to lease line ip.
 
-#### NOTE: Use - del at the place of -add to delete the entires.
+#### NOTE: Use - del at the place of -add to delete the entries.
 
 #### These changes will not be persistent after system reboot. So commit these changes to the relevant files within your distribution.
+
+```
+#Change following file for persistent entry:
+
+vi /etc/syscinfig/network
+
+Gateway="GatewayIp"
+
+# You can add additional static route for eth0, make a file in /etc/sysconfig/netwotk-scripts/ called route-eth0 and add following lines :
+
+192.168.60.0/24 via 192.168.50.1
+
+# The above config sets static routing for network 191.168.60.0/24 via 192.168.50.1 router.
