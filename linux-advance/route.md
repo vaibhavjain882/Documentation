@@ -57,5 +57,5 @@ $ route add default gw "lease line ip"
 ```
 Now when you try to access the internet (for example: ping google.com) from any of these machines (for example, from 192.168.3.2), it will redirect to lease line ip.
 
-
+#### NOTE: Use - del at the place of -add to delete the entires.
 
