@@ -59,3 +59,4 @@ Now when you try to access the internet (for example: ping google.com) from any 
 
 #### NOTE: Use - del at the place of -add to delete the entires.
 
+#### These changes will not be persistent after system reboot. So commit these changes to the relevant files within your distribution.
