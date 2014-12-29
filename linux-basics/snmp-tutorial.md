@@ -111,3 +111,20 @@ snmptrapd -mALL -Lo -f -t -OvQ -e -F "%H.%J.%K:%W:%w %q from %A:%V,% %v\n"
 set /SP/alertmgmt/rules testalert=true
 
 ```
+Response from a device not supporting SNMP: 
+Timeout: No Response from 192.168.62.250
+
+#### Configuration of snmp on your Cisco router
+```
+Connect to your virtual Cisco router: default login and passwd is cisco.
+enable
+conf t
+snmp-server community YourCommunityString ro 99
+access-list 99 permit 10.10.0.0 0.0.255.255
+access-list 99 permit 10.10.254.0 0.0.255.255
+exit
+exit     # until you get back to your PC
+```
+
+
+
