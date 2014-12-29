@@ -125,6 +125,26 @@ access-list 99 permit 10.10.254.0 0.0.255.255
 exit
 exit     # until you get back to your PC
 ```
+### Key Definitions:
 
+#### OIDs:
 
+SNMP works by querying “Objects”. An object is simply something that we can gather information about on a network device.
 
+                   OIDs are very structured, and follow a hierarchical tree pattern – much like a folder structure on your computer. Unlike folders however, all SNMP objects are numbered. So, the top level after the root is ISO, and has the number “1”. The next level, ORG, has the number “3”, since it is the 3rd object under ISO, and so on. OIDs are always written in a numerical form, instead of a text form. So the top three object levels are written as 1.3.1 not iso\org\dod. Because of the way the tree is structured, most SNMP values we’re interested in will always start with the same set of objects – 1.3.6.1. And, in the example above, Interface Status would have an OID of 1.3.6.1.2.1.2.2.1.8.
+
+#### MIBs:
+
+          A MIB is like a translator that helps a Management Station to understand SNMP responses obtained from your network devices. All SNMP devices generally support something called MIB-2, which is a standard set of objects that can be monitored. The Interface status object mentioned earlier is part of this group, as are most system objects like CPU or memory utilization.
+
+#### Three Importand MIBs and OIDs for bandwidth monitoring:
+```
+.1.3.6.1.2.1.2.2.1.10
+ifInOctets 
+
+.1.3.6.1.2.1.2.2.1.16
+ifOutOctets 
+
+.1.3.6.1.2.1.2.2.1.5
+ifSpeed 
+```
