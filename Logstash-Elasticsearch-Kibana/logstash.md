@@ -324,3 +324,24 @@ to_json();
 
 
 - - -
+
+###Logs Searching in Kibana
+
+Lucene provides the ability to create your own queries through its API, it also provides a rich query language through the Query Parser.
+
+```
+Search a specific keyword		"keyword"
+
+Wildcard Searches			test*   or   tes?
+
+Fuzzy Searches				roam~
+
+BOOlean Operators			use 'AND' 'OR' 'NOT'
+
+Grouping Ex. 				"WEB-5" AND ("Dec 27" OR "Dec 30")
+
+Field Grouping Ex.			(+"WEB-50" +"WEB-60")
+
+### Use custom setting in kibana dashboard for date and time selection.
+
+```
