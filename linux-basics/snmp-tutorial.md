@@ -1,6 +1,6 @@
 ###SNMP Introduction
 ---
-"SNMP, or Simple Network Management Protocol, is widely used to communicate with and monitor network devices, servers, and more, all via IP. In this case, we’ll be installing an SNMP agent on a CentOS 6.5 server, which will allow for collection of data from our server, and make the information available to a remote SNMP manager."
+"SNMP, or Simple Network Management Protocol, is widely used to communicate with and monitor network devices, servers, and more, all via IP. In this case, we’ll be installing an SNMP agent on a CentOS server, which will allow for collection of data from our server, and make the information available to a remote SNMP manager."
 
 ### Steps:
 
@@ -9,19 +9,19 @@
 
 2. configure your snmpd.conf file enter your community string at the place of "public" if you want to make it snmp server and if you want to make it client use following command :-
 
-echo rocommunity freelinuxtutorials >> /etc/snmp/snmpd.conf
+echo rocommunity YourCommunityString >> /etc/snmp/snmpd.conf
 
-I am going to make it snmp server and suppose there is already a client whose community string is "saurabh"
+I am going to make it snmp server and suppose there is already a client whose community string is "saurabh" and ip is 192.168.62.250.
 
 3. service snmpd restart
 
 4. chkconfig snmpd on
 
-5. snmpwalk -v 2c -c 209ijvfwer0df92jd -O e 127.0.0.1   # test the snmp service is running fine or not.
+5. snmpwalk -v 2c -c public -O e 127.0.0.1   # test the snmp service is running fine or not.
 
 ```
 
-### SNMP Commands: Suppose client address is 192.168.62.250
+### SNMP Commands: 
 
 #### snmpwalk
 ```
