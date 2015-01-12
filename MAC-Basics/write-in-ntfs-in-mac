@@ -1,4 +1,4 @@
-By default you can’t write to Windows NTFS hard disk and USB drives as they appear as read only on the Desktop’s of OS X 10.9 users workstations.
+####By default you can’t write to Windows NTFS hard disk and USB drives as they appear as read only on the Desktop’s of OS X 10.9 users workstations.
 
 Xcode and homebrew should be installed on your machine. Now foolow below steps to make your external Windows NTFS hard disk and USB drives writable in MAC-
 
