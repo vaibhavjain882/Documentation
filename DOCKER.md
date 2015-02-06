@@ -54,4 +54,200 @@ an application to run. Each container is created from a Docker image. Docker con
 started, stopped, moved, and deleted. Each container is an isolated and secure application platform. 
 Docker containers are the run component of Docker.
 ```
-### Demonstration Of Docker: Continued...
+####Dockerfiles:
+```
+Each Dockerfile is a script, composed of various commands (instructions) and arguments listed successively to automatically perform actions on a base image in order to create (or form) a new one.
+```
+### Demonstration Of Docker: Production Environment
+Note: Docker works on the basis of Daemon-client structure. If you install docker onto a machine/server, both daemon and client works on same machine/server. But for better practice in production environment you should run docker daemon on your Server and client on your/Developer's local machine because you woud'nt want to give access at server to all the developers in company. You can make your private docker-registry server for saving various images so that you can pull/push images without using more bandwidth.
+
+                      I am going to use Centos as server and your/Developers MAC/Windows machine for client. Suppose You have a newly fresh installed Centos server.
+
+1. Install Docker
+```
+yum install docker docker-io
+```
+2. Run Docker daemon in background, listening to any ip address on your host on both the network and a unix socket (It should be in your Company's private network otherwise it is vulnerable).
+```
+docker -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock -d & 
+```
+####Install Boot2docker on your local machine from it's official website.
+
+1. Open terminal and run below commands to get docker shell on local machine:
+```
+boot2docker init
+boot2docker start
+boot2docker ssh
+```
+2. Run following command to connect with Docker Server-
+```
+export DOCKER_HOST=tcp://docker-server-IP:2375
+```
+Now whatever you want to do on docker you can do from your local machine to docker server.
+
+####You can make your own base centos image:
+NOTE: You have to just execute following script. This Script creates optimal and minimul base image for centos. It ask for an argument which would be your image name (Use only small letters in naming it.). If you execute this script then you don't need to follow step 1 and 2, directly jump to step 3.
+```
+#!/usr/bin/env bash
+#
+# Create a base CentOS Docker image.
+#
+# This script is useful on systems with yum installed (e.g., building
+# a CentOS image on CentOS).  See contrib/mkimage-rinse.sh for a way
+# to build CentOS images on other systems.
+
+usage() {
+    cat <<EOOPTS
+$(basename $0) [OPTIONS] <name>
+OPTIONS:
+  -y <yumconf>  The path to the yum config to install packages from. The
+                default is /etc/yum.conf.
+EOOPTS
+    exit 1
+}
+
+# option defaults
+yum_config=/etc/yum.conf
+while getopts ":y:h" opt; do
+    case $opt in
+        y)
+            yum_config=$OPTARG
+            ;;
+        h)
+            usage
+            ;;
+        \?)
+            echo "Invalid option: -$OPTARG"
+            usage
+            ;;
+    esac
+done
+shift $((OPTIND - 1))
+name=$1
+
+if [[ -z $name ]]; then
+    usage
+fi
+
+#--------------------
+
+target=$(mktemp -d --tmpdir $(basename $0).XXXXXX)
+
+set -x
+
+mkdir -m 755 "$target"/dev
+mknod -m 600 "$target"/dev/console c 5 1
+mknod -m 600 "$target"/dev/initctl p
+mknod -m 666 "$target"/dev/full c 1 7
+mknod -m 666 "$target"/dev/null c 1 3
+mknod -m 666 "$target"/dev/ptmx c 5 2
+mknod -m 666 "$target"/dev/random c 1 8
+mknod -m 666 "$target"/dev/tty c 5 0
+mknod -m 666 "$target"/dev/tty0 c 4 0
+mknod -m 666 "$target"/dev/urandom c 1 9
+mknod -m 666 "$target"/dev/zero c 1 5
+
+yum -c "$yum_config" --installroot="$target" --releasever=/ --setopt=tsflags=nodocs \
+    --setopt=group_package_types=mandatory -y groupinstall Core
+yum -c "$yum_config" --installroot="$target" -y clean all
+
+cat > "$target"/etc/sysconfig/network <<EOF
+NETWORKING=yes
+HOSTNAME=localhost.localdomain
+EOF
+```
+# effectively: febootstrap-minimize --keep-zoneinfo --keep-rpmdb
+# --keep-services "$target".  Stolen from mkimage-rinse.sh
+#  locales
+rm -rf "$target"/usr/{{lib,share}/locale,{lib,lib64}/gconv,bin/localedef,sbin/build-locale-archive}
+#  docs
+rm -rf "$target"/usr/share/{man,doc,info,gnome/help}
+#  cracklib
+rm -rf "$target"/usr/share/cracklib
+#  i18n
+rm -rf "$target"/usr/share/i18n
+#  sln
+rm -rf "$target"/sbin/sln
+#  ldconfig
+rm -rf "$target"/etc/ld.so.cache
+rm -rf "$target"/var/cache/ldconfig/*
+
+version=
+if [ -r "$target"/etc/redhat-release ]; then
+    version="$(sed 's/^[^0-9\]*\([0-9.]\+\).*$/\1/' "$target"/etc/redhat-release)"
+fi
+
+if [ -z "$version" ]; then
+    echo >&2 "warning: cannot autodetect OS version, using '$name' as tag"
+    version=$name
+fi
+
+tar --numeric-owner -c -C "$target" . | docker import - $name:$version
+docker run -i -t $name:$version echo success
+
+rm -rf "$target"
+```
+Now, jump to step 3. Suppose your base image name centosbaseimage
+
+1. make your account at docker hub website to pull a base centos image and then from terminal search for desired images:
+```
+docker serach centos
+```
+It will ask for your docker hub credentials (Only Once), give them. Then it will show all the images of centos available on dockerHub. 
+
+2. Choose one image and pull it. Suppose you choose centosbaseimage.
+```
+docker pull centosbaseimage
+```
+3. You can see your image by following command-
+```
+docker images
+```
+4. Now run this image and login in it.
+```
+docker -t -i centosbaseimage /bin/bash
+```
+Now, you will be at centos shel. Made some changes on it.
+
+5.Suppose you installed apache on it.
+```
+yum install httpd
+```
+6. Give our container access to traffic:
+```
+docker run -d -p 80:80 centosbaseimage /usr/sbin/httpd -D FOREGROUND
+```
+Now open another terminal on your local machine, do ssh to boot2docker and run follwing command to see the container id:
+```
+docker images
+```
+Note down the container id of your base image. Suppose it is 6f107ecfa30d 
+
+6. Now commit the changes.
+```
+docker commit 6f107ecfa30d centosliveimage.
+```
+7. Exit from the terminal of your local machine. You service httpd is running and accessible from other machines in same network.
+
+#### Make Dockerfile:
+Suppose load is increasing on your server and you want to scale (increse) the number of servers. You can make a script to run dockerfile which runs after a certain load. But here, i m going to run Dockerfile manually to create another server like centosbaseimage. Follow below steps to make new dcoker image from base image  with dockerfile:
+
+1. Make an empty directory i.e. /make-dockerfile and create a file in it named Dockerfile. Make it executable and copy below lines:
+```
+FROM centosbaseimage
+RUN yum update
+RUN yum install -y httpd
+EXPOSE 80
+ENTRYPOINT /usr/sbin/httpd
+```
+2. Run below command to make other image:
+```
+docker build -t centosliveimage2
+```
+3.Run this image:
+```
+docker run -d -p 80:80 centosliveimage2 /usr/sbin/httpd -D FOREGROUND
+```
+Now your second server is up.
+
+#### NOTE: Learn more commands of docker and dockerfile to be expert.
