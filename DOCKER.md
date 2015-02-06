@@ -62,23 +62,23 @@ Each Dockerfile is a script, composed of various commands (instructions) and arg
 Note: Docker works on the basis of Daemon-client structure. If you install docker onto a machine/server, both daemon and client works on same machine/server. But for better practice in production environment you should run docker daemon on your Server and client on your/Developer's local machine because you woud'nt want to give access at server to all the developers in company. You can make your private docker-registry server for saving various images so that you can pull/push images without using more bandwidth.
                      I am going to use Centos as server and your/Developers MAC/Windows machine for client. Suppose You have a newly fresh installed Centos server.
 
-1. Install Docker
+* Install Docker
 ```
 yum install docker docker-io
 ```
-2. Run Docker daemon in background, listening to any ip address on your host on both the network and a unix socket (It should be in your Company's private network otherwise it is vulnerable).
+* Run Docker daemon in background, listening to any ip address on your host on both the network and a unix socket (It should be in your Company's private network otherwise it is vulnerable).
 ```
 docker -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock -d & 
 ```
 ####Install Boot2docker on your local machine from it's official website.
 
-1. Open terminal and run below commands to get docker shell on local machine:
+* Open terminal and run below commands to get docker shell on local machine:
 ```
 boot2docker init
 boot2docker start
 boot2docker ssh
 ```
-2. Run following command to connect with Docker Server-
+* Run following command to connect with Docker Server-
 ```
 export DOCKER_HOST=tcp://docker-server-IP:2375
 ```
@@ -187,31 +187,31 @@ rm -rf "$target"
 ```
 Now, jump to step 3. Suppose your base image name centosbaseimage
 
-1. make your account at docker hub website to pull a base centos image and then from terminal search for desired images:
+* make your account at docker hub website to pull a base centos image and then from terminal search for desired images:
 ```
 docker serach centos
 ```
 It will ask for your docker hub credentials (Only Once), give them. Then it will show all the images of centos available on dockerHub. 
 
-2. Choose one image and pull it. Suppose you choose centosbaseimage.
+* Choose one image and pull it. Suppose you choose centosbaseimage.
 ```
 docker pull centosbaseimage
 ```
-3. You can see your image by following command-
+* You can see your image by following command-
 ```
 docker images
 ```
-4. Now run this image and login in it.
+* Now run this image and login in it.
 ```
 docker -t -i centosbaseimage /bin/bash
 ```
 Now, you will be at centos shel. Made some changes on it.
 
-5.Suppose you installed apache on it.
+*Suppose you installed apache on it.
 ```
 yum install httpd
 ```
-6. Give our container access to traffic:
+* Give our container access to traffic:
 ```
 docker run -d -p 80:80 centosbaseimage /usr/sbin/httpd -D FOREGROUND
 ```
@@ -221,16 +221,16 @@ docker images
 ```
 Note down the container id of your base image. Suppose it is 6f107ecfa30d 
 
-6. Now commit the changes.
+* Now commit the changes.
 ```
 docker commit 6f107ecfa30d centosliveimage.
 ```
-7. Exit from the terminal of your local machine. You service httpd is running and accessible from other machines in same network.
+* Exit from the terminal of your local machine. You service httpd is running and accessible from other machines in same network.
 
 #### Make Dockerfile:
 Suppose load is increasing on your server and you want to scale (increse) the number of servers. You can make a script to run dockerfile which runs after a certain load. But here, i m going to run Dockerfile manually to create another server like centosbaseimage. Follow below steps to make new dcoker image from base image  with dockerfile:
 
-1. Make an empty directory i.e. /make-dockerfile and create a file in it named Dockerfile. Make it executable and copy below lines:
+* Make an empty directory i.e. /make-dockerfile and create a file in it named Dockerfile. Make it executable and copy below lines:
 ```
 FROM centosbaseimage
 RUN yum update
@@ -238,11 +238,11 @@ RUN yum install -y httpd
 EXPOSE 80
 ENTRYPOINT /usr/sbin/httpd
 ```
-2. Run below command to make other image:
+* Run below command to make other image:
 ```
 docker build -t centosliveimage2
 ```
-3.Run this image:
+*Run this image:
 ```
 docker run -d -p 80:80 centosliveimage2 /usr/sbin/httpd -D FOREGROUND
 ```
@@ -251,33 +251,33 @@ Now your second server is up.
 #### Make Your own docker registry server to save various images:
 Make other server for docker-registry otherwise things will be mess up. Follow below steps to make private docker-registry server:
 
-1. Install docker and docker-registry on new server:
+* Install docker and docker-registry on new server:
 ```
 yum install docker-io docker-registry
 ```
-2. Start these services:
+* Start these services:
 ```
 service docker-io start
 service docker-registry start
 ```
-3. At your local machine , do ssh for boot2docker.
+* At your local machine , do ssh for boot2docker.
 ```
 boot2docker ssh
 ```
-4. If any image you have made before on your local machine see it's image id by 
+* If any image you have made before on your local machine see it's image id by 
 `docker images` command and note it down. Now delete docker.pid file in /var/run
 ```
 rm docker.pid
 ```
-5. run following command to run docker as daemon in background at your local machine:
+* run following command to run docker as daemon in background at your local machine:
 ```
 docker -d --insecure-registry docker-registry-server-ip:5000 &
 ```
-6.Tag you image:
+*Tag you image:
 ```
 docker tag your-image-id docker-registry-server-ip:5000/your-image-name
 ```
-7. Now, push your image on registry server:
+* Now, push your image on registry server:
 ```
 docker push your-image-id docker-registry-server-ip:5000/your-image-name
 ```
