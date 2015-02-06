@@ -60,8 +60,7 @@ Each Dockerfile is a script, composed of various commands (instructions) and arg
 ```
 ### Demonstration Of Docker: Production Environment
 Note: Docker works on the basis of Daemon-client structure. If you install docker onto a machine/server, both daemon and client works on same machine/server. But for better practice in production environment you should run docker daemon on your Server and client on your/Developer's local machine because you woud'nt want to give access at server to all the developers in company. You can make your private docker-registry server for saving various images so that you can pull/push images without using more bandwidth.
-
-                      I am going to use Centos as server and your/Developers MAC/Windows machine for client. Suppose You have a newly fresh installed Centos server.
+                     I am going to use Centos as server and your/Developers MAC/Windows machine for client. Suppose You have a newly fresh installed Centos server.
 
 1. Install Docker
 ```
@@ -155,7 +154,6 @@ cat > "$target"/etc/sysconfig/network <<EOF
 NETWORKING=yes
 HOSTNAME=localhost.localdomain
 EOF
-```
 # effectively: febootstrap-minimize --keep-zoneinfo --keep-rpmdb
 # --keep-services "$target".  Stolen from mkimage-rinse.sh
 #  locales
