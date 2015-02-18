@@ -19,7 +19,7 @@ WHERE STATE_DESC='SUSPECT'
 ```
 2.Open the latest SQL Server Error Log and check for errors logged for the database which is marked as suspect.
 
-3. 3. When a database is in SUSPECT mode you will not be able to get connected to the database. Hence you need to bring the database first in EMERGENCY mode to repair the database.
+3. When a database is in SUSPECT mode you will not be able to get connected to the database. Hence you need to bring the database first in EMERGENCY mode to repair the database.
 ```
 EXEC sp_resetstatus [YourDatabase];
 ALTER DATABASE [YourDatabase] SET EMERGENCY
