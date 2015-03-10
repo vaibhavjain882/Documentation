@@ -116,14 +116,23 @@ To verify your configuration, first check, whether the stickyness is based on a 
 %{MYCOOKIE}C
 The value contained in the cookie with name MYCOOKIE. The name should be the same given in the stickysession attribute.
 %{Set-Cookie}o
+
 This logs any cookie set by the back-end. You can track, whether the back-end sets the session cookie you expect, and to which value it is set.
+
 %{BALANCER_SESSION_STICKY}e
+
 The name of the cookie or request parameter used to lookup the routing information.
+
 %{BALANCER_SESSION_ROUTE}e
+
 The route information found in the request.
+
 %{BALANCER_WORKER_ROUTE}e
+
 The route of the worker chosen.
+
 %{BALANCER_ROUTE_CHANGED}e
+
 Set to 1 if the route in the request is different from the route of the worker, i.e. the request couldn't be handled sticky.
 
 Common reasons for loss of session are session timeouts, which are usually configurable on the back-end server.
