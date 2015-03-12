@@ -84,7 +84,7 @@ reboot
 
 cat /etc/redhat-release
 ```
-####Above way is only for upgrading centos 6.5. If you want general way then just make below repo and install following packages:
+####Above way is only for upgrading centos 6.5. If you want general way then just follow below steps:
 
 ```
 vi /etc/yum.repos.d/upgrade.repo
@@ -96,6 +96,8 @@ enabled=1
 gpgcheck=0
 
 yum -y install preupgrade-assistant-contents redhat-upgrade-tool preupgrade-assistant
+
+preupg
 
 rpm --import http://centos.excellmedia.net/7.0.1406/os/x86_64/RPM-GPG-KEY-CentOS-7
 
