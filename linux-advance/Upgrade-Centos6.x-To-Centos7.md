@@ -78,6 +78,8 @@ rpm -ihv http://dev.centos.org/centos/6/upg/x86_64/Packages/redhat-upgrade-tool-
 
 preupg -s RHEL6_7		
 
+#From the above you can find what all are the packages and application will be affected by 
+this upgrade, if you are ok with it; you can go ahead for the next step.
 redhat-upgrade-tool-cli --network 7.0 --instrepo http://mirror.centos.org/centos/7/os/x86_64/ --force
 
 reboot
@@ -101,7 +103,10 @@ preupg
 
 rpm --import http://centos.excellmedia.net/7.0.1406/os/x86_64/RPM-GPG-KEY-CentOS-7
 
- redhat-upgrade-tool --network 7.0 --instrepo http://centos.excellmedia.net/7.0.1406/os/x86_64/ --force
+ redhat-upgrade-tool --network 7.0 --instrepo http://centos.excellmedia.net/7.0.1406/os/x86_64/ 
+
+# In between the upgradation , you will find the list of issues if you are okay with it
+then continue the upgradation otherwise first fix the issue and then again run the command.
 ```
 
 
