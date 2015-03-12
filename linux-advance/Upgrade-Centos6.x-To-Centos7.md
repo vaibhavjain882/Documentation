@@ -79,7 +79,9 @@ rpm -ihv http://dev.centos.org/centos/6/upg/x86_64/Packages/redhat-upgrade-tool-
 preupg -s RHEL6_7		
 
 #From the above you can find what all are the packages and application will be affected by 
-this upgrade, if you are ok with it; you can go ahead for the next step.
+this upgrade, if you are ok with it; you can go ahead for the next step.You will find your all 
+the recommendation in "/root/preupgrade/./" directory
+
 redhat-upgrade-tool-cli --network 7.0 --instrepo http://mirror.centos.org/centos/7/os/x86_64/ --force
 
 reboot
