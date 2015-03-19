@@ -17,34 +17,46 @@ Configurations and definitions that are created and modified on a workstation ar
 In this directory, we can find a structure that looks like this:
 
 1.certificates/: Contains the SSL certificates that can be associated with clients for authentication.
+
 2.chefignore: Lists the files and directories within the structure that should not be included in the push to the server.
+
 3.config/: Contains one of the two repository configuration files:
 rake.rb: Defines some variable declarations for creating SSL certificates and some general options. 
+
 4.cookbooks/: Contains the cookbooks that configure the infrastructure for your organization.
+
 5.data_bags/:Data bags are protected sub-directories that contain sensitive configuration details. They are only accessible to those nodes that have matching SSL certificates and contain JSON formated files with configuration details.
+
 6.environments/: Contains a top-level location to contain details for deploying the environment.
 Every environment that diverges from the default environment must be defined in this directory.
+
 7.Rakefile: This file defines the tasks that chef can perform in its configurations.
+
 8.Roles/: Contains files that define the roles that can be assigned to nodes.
 
 ####Chef Cookbook File Structure:
 
 1.The metadata.rb or metadata.json files contains metadata information about the service. This includes basic information like the name of the cookbook and the version, but it also is the place where the dependency information is stored. If this cookbook depends on other cookbooks to be installed, it can list them in this file and chef will install and configure them prior to the current cookbook.
+
 2.The attributes directory contains attribute definitions that can be used to override or define settings for the nodes that will have this service.
+
 3.The definitions directory contains files that declare resources. This means that you can group functionality together under one heading.
+
 4.The files directory describes how chef should distribute files throughout the node on which this cookbook is deployed.
+
 5.The recipes directory contains the "recipes" that define how the service should be configured. Recipes are generally small files that configure specific aspects of the larger system. If a cookbook used to install and configure a web server, a recipe may enable a module or set up a sane firewall default.
+
 6.The templates directory is used to provide more complex configuration management. You can provide entire configuration files that contain embedded Ruby commands. The variables that are printed can be defined in other files.
 
 ### Installation and Configuration: Server
 1.Download the rpm package (For Centos) and install it and then follow below steps:
 
 ```
-chef-server-ctl reconfigure
+$chef-server-ctl reconfigure
 
-chef-server-ctl user-create USERNAME FIRST_NAME LAST_NAME EMAIL PASSWORD -f USERNAME.pem
+$chef-server-ctl user-create USERNAME FIRST_NAME LAST_NAME EMAIL PASSWORD -f USERNAME.pem
 
-chef-server-ctl org-create SHORTNAME LONGNAME --association_user USERNAME -f SHORTNAME-validator.pem
+$chef-server-ctl org-create SHORTNAME LONGNAME --association_user USERNAME -f SHORTNAME-validator.pem
 
 ## SHORTNAME: your organization's short name
 ## LONGNAME: your organization's full name
@@ -55,7 +67,7 @@ The actual infrastructure coordination and configuration does not take place on 
 Suppose your workstation is a MAC machine.
 # Clone the Chef Repo from git
 
-git clone https://github.com/chef/chef-repo.git
+$git clone https://github.com/chef/chef-repo.git
 
 # You can Push yor chef repo on git but here i am skipping this.
 
@@ -63,9 +75,9 @@ git clone https://github.com/chef/chef-repo.git
 
 # Download the authenciation keys to the workstation from Server.
 
-scp root@server_domain_or_IP:/root/USERNAME.pem ~/chef-repo/.chef
+$scp root@server_domain_or_IP:/root/USERNAME.pem ~/chef-repo/.chef
 
-scp root@server_domain_or_IP:/root/SHORTNAME-validator.pem ~/chef-repo/.chef
+$scp root@server_domain_or_IP:/root/SHORTNAME-validator.pem ~/chef-repo/.chef
 
 ## Now configure knife for your chef environment. open a knife.rb file in .chef directory and copy below content:
 
@@ -90,7 +102,7 @@ $ knife ssl fetch
 
 # Now test your configuration by running following command:
 
-knife client list
+$knife client list
 
 # It will give you output like "SHORTNAME-validator".
 ```
@@ -136,12 +148,12 @@ and test it in our chef environment.
 Cookbooks are usually used to handle one specific service, application, or functionality. Cookbooks are created on the workstation and then uploaded to a Chef server. 
 Go to your chef repo directory and Create a simple cookbook for nginx:
 ```
-knife cookbook create nginx
+$knife cookbook create nginx
 
-cd cookbooks/nginx
+$cd cookbooks/nginx
 
-cd recipes
-vi default.rb
+$cd recipes
+$vi default.rb
 ## Copy below content in this file :
 include_recipe "apt"
 package 'nginx' do
@@ -160,7 +172,7 @@ end
 #As you saw above, we defined a "cookbook_file" resource which should move a file called "index.html" 
 into the document root on the node. We need to create this file.
 
-vi /chef-repo/cookbooks/nginx/files/default/index.html
+$vi /chef-repo/cookbooks/nginx/files/default/index.html
 
 # Copy below content just for testing purpose:
 <html>
@@ -175,8 +187,8 @@ vi /chef-repo/cookbooks/nginx/files/default/index.html
 
 # You have to create a helper cookbook also like yum update before installing anything on your centos node server.
 
-knife cookbook create yum 
-vi /chef-repo/cookbooks/yum/recipes/default.rb
+$knife cookbook create yum 
+$vi /chef-repo/cookbooks/yum/recipes/default.rb
 
 # copy below content in this file :
 
@@ -185,7 +197,7 @@ execute "yum update" do
 end
  # Open the below file and copy given content:
 
-vi /chef-repo/cookbooks/nginx/metadata.rb
+$vi /chef-repo/cookbooks/nginx/metadata.rb
 
 name             'nginx'
 maintainer       'YOUR_COMPANY_NAME'
@@ -320,9 +332,9 @@ knife search "role:database_server AND chef_environment:prod" -a name
 In our "chef-repo" directory on our workstation, we should have an environments directory. This is where we should put our environment files.
 
 ```
-cd ~/chef-repo/environments
+$d ~/chef-repo/environments
 
-vi development.rb
+$vi development.rb
 
 ## Copy below content in this:
 
