@@ -406,6 +406,6 @@ knife-ssh> uptime
 ```
 
 Now, approximately all the basic tasks has been done.
-
+You can manage windows server by using knife-windows tool and winrm. Ansible also provide support for windows server by some windows modules but it is not sufficient.In existing automation tools chef is good for managing windows server (said by powershell developer). Puppet is old and a liitle bit complex in configuration than chef. Chef and puppet both are agent/server and standalone also. 
 
 
