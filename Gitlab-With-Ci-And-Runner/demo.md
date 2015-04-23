@@ -123,10 +123,3 @@ https://github.com/srbhkmrsngh/Documentation/blob/master/Rsync/Rsync.md
 4. Now make any changes in Readme.md push it to repository. Your build will run automatically and your code will be pushed to all production servers. 
 
 You can make many deploy script such as for developer branch and for master branch and on every push at any branch your related build will run.
-
-
-
-
-6.
-
-
