@@ -30,7 +30,7 @@ gitlab-ctl reconfigure
 
 Now, acess gitlab.example.com from browser. default username and password should be the following:
 
-``
+```
 Username: root 
 Password: 5iveL!fe
 ```
