@@ -306,19 +306,26 @@ project root for every commit, filter- branch can help you do that, too:
 here’s a cheat-sheet for which commands affect which trees. The “HEAD” column reads “REF” if that command moves the reference (branch) that HEAD points to, and “HEAD” if 
 it moves HEAD itself. Pay especial attention to the WDSafe? column – if it says NO, take a second to think before running that com- mand.
 $ git merge abort: ABORTING A MERGE
+
 $ git merge -Xignore-space-change whitespace: In this specific case, the conflicts are whitespace related. We know this because the case is simple, but it’s also 
 pretty easy to tell in real cases when looking at the conflict because every line is removed on one side and added again on the other. By default, Git sees all of 
 these lines as being changed, so it can’t merge the files.
+
  $ git log --oneline --left-right HEAD…MERGE_HEAD: To get a full list of all of the unique commits that were included in either branch involved in this merge, we can use the “triple dot” syntax that we learned in “Triple Dot”.
 
 $ 
-git log --oneline --left-right —merge: it will only show the commits in either
-side of the merge that touch a file that’s currently conflicted. $ git revert -m 1 HEAD: REVERSE THE COMMIT If moving the branch pointers around isn’t going to work 
+git log --oneline --left-right —merge: it will only show the commits in eitherside of the merge that touch a file that’s currently conflicted. 
+
+$ git revert -m 1 HEAD: REVERSE THE COMMIT If moving the branch pointers around isn’t going to work 
 for you, Git gives you the option of making a new commit which undoes all the changes from an ex- isting one. Git calls this operation a “revert”, and in this particular 
-scenario, you’d invoke it like this:$ git blame -L 12,22 simplegit.rb: If you track down a bug in your code and want to know when it was introduced and why, file annotation 
+scenario, you’d invoke it like this:
+
+$ git blame -L 12,22 simplegit.rb: If you track down a bug in your code and want to know when it was introduced and why, file annotation 
 is often your best tool. It shows you what commit was the last to modify each line of any file. So, if you see that a method in your code is buggy, you can annotate 
 the file with git blame to see when each line of the method was last edited and by whom. This example uses the -L option to limit the output to lines 12 through 
-22:Binary Search: Let’s say you just pushed out a release of your code to a production environ- ment, you’re getting bug reports about something that wasn’t happening 
+22:
+
+Binary Search: Let’s say you just pushed out a release of your code to a production environ- ment, you’re getting bug reports about something that wasn’t happening 
 in your development environment, and you can’t imagine why the code is doing that. You go back to your code, and it turns out you can reproduce the issue, but you can’t 
 figure out what is going wrong. You can bisect the code to find out. First you run git bisect start to get things going, and then you use git bisect bad to tell the 
 system that the current commit you’re on is bro- ken. Then, you must tell bisect when the last known good state was, using git bisect good [good_commit]: 
@@ -329,6 +336,7 @@ $ git bisect bad
 $ git bisect good v1.0git submodule update —remote: Bundling: The bundle com-
 mand will package up everything that would normally be pushed over the wire with a git push command into a binary file that you can email to 
 someone or put on a flash drive, then unbundle into another repository.
+
 $ git bundle create repo.bundle HEAD master: if you want to send that repository to someone and you don’t have access toa repository to push to, or simply don’t want to 
 set one up, you can bundle it with git bundle create. 
 
@@ -336,6 +344,7 @@ $ git clone repo.bundle repo: use that bundle
 
 $ git replace 81a708d c6e1e95: you can simply call git replace with the commit you want to replace and then the commit you want to replace it with. So we want to replace the 
 “fourth” commit in the master branch with the “fourth” commit in the project-history/master branch:$ git config --global credential.helper store --file ~/.my-credentials: OR $ git config --global credential.helper cache
+
 $ git credential fill: to create the credential file 
 $ git show-ref: 
 here’s what a repository with tags looks like after a fresh clone:
