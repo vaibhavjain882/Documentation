@@ -285,42 +285,62 @@ Now, you can see your image on registry server and pull your image anywhere.
 
 ####Few Docker commands:
 ```
-PURPOSE				COMMAND
-Build an image	        	docker build –rm=true .
-Install an image		docker pull ${IMAGE}
-List of installed images	docker images
+PURPOSE						COMMAND
+
+Build an image	        			docker build –rm=true .
+Install an image				docker pull ${IMAGE}
+List of installed images			docker images
 List of installed images (detailed listing)	docker images –no-trunc
-Remove an image			docker rmi ${IMAGE_ID}
-Remove all untagged images	docker rmi $(docker images | grep “^” | awk “{print $3}”)
-Remove all images		docker rm $(docker ps -aq)
-Run a container	docker run
-List containers	docker ps
-Stop a container		docker stop ${CID}
-Find IP address of the container docker inspect –format ‘{{ .NetworkSettings.IPAddress }}’ ${CID}
-Attach to a container		docker attach ${CID}
-Remove a container		docker rm ${CID}
-Remove all containers		docker rm $(docker ps -aq) 
+Remove an image					docker rmi ${IMAGE_ID}
+Remove all untagged images			docker rmi $(docker images | grep “^” | awk “{print $3}”)
+Remove all images				docker rm $(docker ps -aq)
+Run a container					docker run
+List containers					docker ps
+Stop a container				docker stop ${CID}
+Find IP address of the container 		docker inspect –format ‘{{ .NetworkSettings.IPAddress }}’ ${CID}
+Attach to a container of with bash		docker attach ${CID}  # give only a single cmd
+Remove a container				docker rm ${CID}
+Remove all containers				docker rm $(docker ps -aq) 
+ssh into container of without bash		docker exec -it <containerIdOrName> bash # give mnultiple cmd
 ```
-#### Dockerfile Commands:
-```
-FROM <image>	The FROM instruction sets the Base Image for subsequent instructions
+### Dockerfile Commands:
 
-MAINTAINER <name>  The MAINTAINER instruction allows you to set the Author field of the generated images.
+####FROM <image>:	
 
-RUN <command>    The RUN instruction will execute any commands in a new layer on top of the current image and commit the results.
+The FROM instruction sets the Base Image for subsequent instructions
 
-CMD ["executable","param1","param2"]  The main purpose of a CMD is to provide defaults for an executing container
+#### MAINTAINER <name>:  
 
-EXPOSE <port> [<port>...]  The EXPOSE instructions informs Docker that the container will listen on the specified network ports at runtime.
+The MAINTAINER instruction allows you to set the Author field of the generated images.
 
-ENV <key> <value>   The ENV instruction sets the environment variable <key> to the value <value>. This value will be passed to all future RUN instructions.
+####RUN <command>:    
 
-ADD <src>... <dest>   The ADD instruction copies new files, directories or remote file URLs from <src> and adds them to the filesystem of the container at the path <dest>.
+The RUN instruction will execute any commands in a new layer on top of the current image and commit the results.
 
-COPY <src>... <dest>  The COPY instruction copies new files or directories from <src> and adds them to the filesystem of the container at the path <dest>.
+#### CMD ["executable","param1","param2"]: 
 
-ENTRYPOINT command param1 param2   An ENTRYPOINT allows you to configure a container that will run as an executable.
+The main purpose of a CMD is to provide defaults for an executing container
+
+#### EXPOSE <port> [<port>...]:  
+
+The EXPOSE instructions informs Docker that the container will listen on the specified network ports at runtime.
+
+#### ENV <key> <value>:   
+
+The ENV instruction sets the environment variable <key> to the value <value>. This value will be passed to all future RUN instructions.
+
+#### ADD <src>... <dest>:
+
+   The ADD instruction copies new files, directories or remote file URLs from <src> and adds them to the filesystem of the container at the path <dest>.
+
+####COPY <src>... <dest>:
+
+  The COPY instruction copies new files or directories from <src> and adds them to the filesystem of the container at the path <dest>.
+
+####ENTRYPOINT command param1 param2:
+
+   An ENTRYPOINT allows you to configure a container that will run as an executable.
 
 ETC.
-```
+
 
