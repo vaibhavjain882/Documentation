@@ -179,3 +179,4 @@ The default password for the oneadmin user can be found in ~/.one/one_auth which
 
 Now, you can make your own vCloud, vDatatcenter and you can make templates, migrate, clone, and autoscale VMs. Use "oneflow" server with opennebula for more functionality.
 
+http://docs.opennebula.org/4.8/design_and_installation/quick_starts/qs_centos7_kvm.html
