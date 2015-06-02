@@ -32,6 +32,10 @@ Create and receive customized reports that are just as easy to read as they are 
 
 *Host USage: The APM Host Usage Report provides a clear view into the unique hosts and applications that have connected to New Relic during a specified time window. Host usage reporting provides details on which applications and accounts each host was used by on an hourly basis.
 
+*Apdex: Measuring user satisfaction:Apdex  is an industry standard to measure users' satisfaction with the response time of an application or service. It's a simplified Service Level Agreement (SLA) solution that gives application owners better insight into how satisfied users are, in contrast to traditional metrics like average response time, which can be skewed by a few very long responses.
+
+*New Relic Browser: New Relic Browser provides deep visibility and actionable insights into real users' experiences on your website. With standard page load timing (sometimes referred to as real user monitoring or RUM), New Relic measures the overall time to load the entire webpage. However, New Relic Browser goes beyond RUM to also help you monitor the performance of individual sessions, AJAX requests, and JavaScript errors—extending the monitoring throughout the entire life cycle of the page.
+
 *Custom dashboards: 
 
 *SLA: View daily, weekly, or monthly SLA reports showing graphical trends over selected time periods, to better understand where application performance is heading. 
