@@ -15,7 +15,7 @@
 
 ###Some key definitions:
 
-client -> 
+client -> root server -> .com server -> google.com server ->  
 ####Caching-only DNS Server:
 Whether you use the server manager or Windows PowerShell, the DNS server has no zone configured right after the installation. Without zones, you could still use this server as a caching-only DNS.
 
