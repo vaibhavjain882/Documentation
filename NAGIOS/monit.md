@@ -7,3 +7,4 @@
 
 4. You can configure email and sms notifications also in monit.
 
+5. It provides flexibility to run any script at any specific condition.
