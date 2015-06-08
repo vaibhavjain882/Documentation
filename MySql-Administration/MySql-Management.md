@@ -57,7 +57,7 @@ UPDATE table1, table2 SET field1=new_value1, field2=new_value2, ...
 WHERE table1.id1 = table2.id2 AND condition
 ```
 ####Browsing
-``
+```
 SHOW DATABASES
 SHOW TABLES
 SHOW FIELDS FROM table / SHOW COLUMNS FROM table / DESCRIBE table / DESC table / EXPLAIN table
