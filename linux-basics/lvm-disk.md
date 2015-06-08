@@ -133,8 +133,14 @@ resize2fs /dev/VG-Name-Of-Increasing-LV/LV-Name-To-Be-Incrementing
 
 Now, all done. You can see your incremented Volume size by "lvdisplay" command.
 
+#### For centos 7 VM:
 
+At the place of resize2fs command you will have to use follwoing command:
 
+```
+pvresize -v /dev/sda3
+lvresize -r -l+100%FREE /dev/VG-Name-Of-Increasing-LV/LV-Name-To-Be-Incrementing
+```
 
 
 
