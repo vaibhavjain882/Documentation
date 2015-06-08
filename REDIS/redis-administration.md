@@ -180,3 +180,6 @@ additionally use "SLOWLOG" to track the slowest queries in an interval. For exam
 
 SLOWLOG RESET
 ```
+####NUTCRACKER:
+
+nutcracker is a fast and lightweight proxy formemcached and redis protocol. It was built primarily to reduce the number of connections to the caching servers on the backend.
