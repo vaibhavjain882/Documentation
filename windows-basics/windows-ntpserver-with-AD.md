@@ -15,4 +15,8 @@ If a system isn't a member of a domain, you must manually configure it to synchr
 2. On the Internet Time tab, select a time server from the drop-down list, or enter the DNS name of your network's internal time source.
 3. Click Update Now, click Apply, and click OK.
 
-It's important to make sure that any access control lists on your network allow UDP port 123 to and from systems to the selected time source
+It's important to make sure that any access control lists on your network allow UDP port 123 to and from systems to the selected time source.
+
+w32tm /query /status: for seeing status
+For linux ntp client install ntpdate tool and fire a command 
+ntpdate dnsserevrip
