@@ -165,6 +165,11 @@ F8 = Sequentially displays previous command-line entries
 F9 = Enables user to recall previous command lines by number (0 = first line)
 
 ```
+####Copy a file from local computer to remote computer:
+```
+robocopy SourceDir \\RemoteComputer\C$\DestDir FileName
 
+Note: Use $ in place of : when you are writing the remote path.
+```
 
 
