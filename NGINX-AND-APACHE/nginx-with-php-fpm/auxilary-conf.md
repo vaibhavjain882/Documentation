@@ -86,3 +86,4 @@ types {
   video/x-mng                           mng;
 }
 ```
+NOTE: You should install nginx with source code by compiling required modules together. yum install only gives few modules by default. If you want to add any extra module you will have to compile nginx once again after adding that module with another modules.
