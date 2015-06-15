@@ -3,10 +3,10 @@
 for i in {125..128}; do ssh -t saurabhs@192.168.22.$i "echo '192.168.21.11    IRONMQ.bookmyshow.org' | sudo tee -a /etc/hosts";done
 
 Note: redirection >> doesn't work with echo in this case and it requires tty shell also so avoid to use >>.
-
+```
 ###AWK:
 Awk is a scripting language which is used  for  processing or analyzing text files. Or we can say that awk is mainly used for grouping of data based on either a column or field , or on a set of columns. Mainly it's used for reporting data in a usefull manner. It also employs Begin and End Blocks to process the data.
-
+```
 awk 'pattern {action}' input-file > output-file
 
 Lets take a input file with the following data
