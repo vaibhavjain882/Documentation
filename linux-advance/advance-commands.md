@@ -224,5 +224,13 @@ sed '/INCLUDE/ r file' <in >out
 
 The following will append the file "end" at the end of the file (address "$)." 
 
-20.
+20. Find blank lines and commmented lines:
+
+grep -vE "^$|^#|^ #"
+
+where:
+-v: show content except which we r searching
+-E: for multiple searching
+
+```
 ``` 
