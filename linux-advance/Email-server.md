@@ -75,4 +75,4 @@ chkconfig --level 345 dovecot on
 ```
 Postfix is an extremely powerful and versatile mail transport agent. In this article we have seen how to implement a basic email server using postfix and dovecot for a single domain based on system user accounts. We have barely scratched the surface of the true capabilities of a postfix-based system, but hopefully have provided a solid working foundation on which new users can build.
 
-
+#### In NTP server install ntpd on both server and client see "server" argument in server and "restrict" argument in client.
