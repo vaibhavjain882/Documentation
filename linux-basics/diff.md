@@ -221,3 +221,4 @@ ed - file1.txt < my-ed-script.txt
 we can see that file1.txt now matches file2.txt exactly.
 #### cmp: compares files by byte by byte.
 #### comm: compare sorted file line by line
+####merge: I always use merge tool instead of this command
