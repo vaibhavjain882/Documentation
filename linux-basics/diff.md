@@ -219,3 +219,5 @@ We can issue this script to ed with the following command, telling it to overwri
 ed - file1.txt < my-ed-script.txt
 ```
 we can see that file1.txt now matches file2.txt exactly.
+#### cmp: compares files by byte by byte.
+#### comm: compare sorted file line by line
