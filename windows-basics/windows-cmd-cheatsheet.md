@@ -172,4 +172,7 @@ robocopy SourceDir \\RemoteComputer\C$\DestDir FileName
 Note: Use $ in place of : when you are writing the remote path.
 ```
 
-
+####Running a windows command remotely at multiple servers:
+```
+invoke-command -computername Server01, Server02 {iisreset}
+```
