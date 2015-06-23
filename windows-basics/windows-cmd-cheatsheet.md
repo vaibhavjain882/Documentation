@@ -176,3 +176,14 @@ Note: Use $ in place of : when you are writing the remote path.
 ```
 invoke-command -computername Server01, Server02 {iisreset}
 ```
+
+#### Installing exe softwares throgh powershell:
+```
+Start-Process "setup.exe" -ArgumentList "/s" -Wait
+```
+you can run this command remotely in invoke-command cmdlet.
+
+#### Install msi softwares:
+```
+msiexec /i software.msi /norestart
+```
