@@ -404,7 +404,114 @@ No you will get a knife shell from where you can run any command to multiple ser
 ```
 knife-ssh> uptime
 ```
+#### Chef cookbook commands:
+####execute:
+Use the execute resource to execute a single command. Commands that are executed with this resource are (by their nature) not idempotent, as they are typically unique to the environment in which they are run. Use not_if and only_if to guard this resource for idempotence.
+Syntax:
+```
+execute "name" do
+  attribute "value" # see attributes section below
+  ...
+  action :action # see actions section below
+end
+```
+####Actions:
+```
+:run	Default. Use to run a command.
+:nothing	Use to prevent a command from running. This action is used to specify that a command is run only when another resource notifies it
+```
 
+####Attributes:
+```
+command		The name of the command to be executed. Default value: the name of the resource block.
+creates		Use to prevent a command from creating a file when that file already exists.
+cwd		The current working directory from which a command is run.
+environment	A Hash of environment variables in the form of {"ENV_VARIABLE" => "VALUE"}. (These variables must exist for a command to be run successfully.)
+group		The group name or group ID that must be changed before running a command.
+path		An array of paths to use when searching for a command. These paths are not added to the command’s environment $PATH. The default value uses the system path.
+provider	Optional. Use to explicitly specify a provider.
+returns		The return value for a command. This may be an array of accepted values. An exception is raised when the return value(s) do not match. Default value: 0
+sensitive	Use to ensure that sensitive resource data is not logged by the chef-client. Default value: false.
+timeout		The amount of time (in seconds) a command will wait before timing out. Default value: 3600.
+user		The user name or user ID that should be changed before running a command.
+umask		The file mode creation mask, or umask.
+```
+
+####Guards:
+A guard attribute can be used to evaluate the state of a node during the execution phase of the chef-client run. Based on the results of this evaluation, a guard attribute is then used to tell the chef-client if it should continue executing a resource. A guard attribute accepts either a string value or a Ruby block value:
+1. A string is executed as a shell command. If the command returns 0, the guard is applied. If the command returns any other value, then the guard attribute is not applied. String guards in a powershell_script run Windows PowerShell commands and may return true in addition to 0.
+2.A block is executed as Ruby code that must return either true or false. If the block returns true, the guard attribute is applied. If the block returns false, the guard attribute is not applied.
+```
+not_if		Use to prevent a resource from executing when the condition returns
+only_if		Use to allow a resource to execute only if the condition returns true.
+```
+Arguments:
+```
+:user		Use to specify the user that a command will run as. For example:
+:group		Use to specify the group that a command will run as. For example:
+:environment	Use to specify a Hash of environment variables to be set. For example:
+:cwd		Use to set the current working directory before running a command. For example:
+:timeout	Use to set a timeout for a command. For example:
+```
+####Examples:
+```
+Run a command upon notification:
+```
+execute "slapadd" do
+  command "slapadd < /tmp/something.ldif"
+  creates "/var/lib/slapd/uid.bdb"
+  action :nothing
+end
+
+template "/tmp/something.ldif" do
+  source "something.ldif"
+  notifies :run, "execute[slapadd]", :immediately
+end
+```
+####BASH:
+Use the bash resource to execute scripts using the Bash interpreter. This resource may also use any of the actions and attributes that are available to the execute resource. Commands that are executed with this resource are (by their nature) not idempotent, as they are typically unique to the environment in which they are run. Use not_if and only_if to guard this resource for idempotence.
+Syntax:
+```
+bash "name" do
+  attribute "value" # see attributes section below
+  ...
+  action :action # see actions section below
+end
+```
+####chef exec:
+The chef exec subcommand is used to run arbitrary shell commands with the PATH environment variable and the GEM_HOME and GEM_PATH Ruby environment variables pointed at the Chef development kit.
+Syntax:
+chef exec SYSTEM_COMMAND (options)
+
+####chef gem:
+The chef gem subcommand is a wrapper around the gem command in RubyGems and is used by Chef to install RubyGems into the Chef development kit development environment. All knife plugins, drivers for Kitchen, and other Ruby applications that are not packaged within the Chef development kit will be installed to the .chefdk path in the home directory: ~/.chefdk/gem/ruby/ver.si.on/bin (where ver.si.on is the version of Ruby that is packaged within the Chef development kit).
+Syntax:
+chef gem GEM_COMMAND GEM_OPTIONS (options)
+Examples:
+To show a gem, run a command similar to:
+chef gem list chef-dk
+
+#### Commands:
+Resources can be of many different types. You can learn about the different resource types here. Some common ones are:
+```
+package: Used to manage packages on a node
+service: Used to manage services on a node
+user: Manage users on the node
+group: Manage groups
+template: Manage files with embedded ruby templates
+cookbook_file: Transfer files from the files subdirectory in the cookbook to a location on the node
+file: Manage contents of a file on node
+directory: Manage directories on node
+execute: Execute a command on the node
+cron: Edit an existing cron file on the node
+```
+cookbook_file example:
+```
+cookbook_file "/usr/share/nginx/www/index.html" do
+  source "index.html"
+  mode "0644"
+```
+Use the execute resource to execute a single command. Commands that are executed with this resource are (by their nature) not idempotent, as they are typically unique to the environment in which they are run. Use not_if and only_if to guard this resource for idempotence.
 Now, approximately all the basic tasks has been done.
 You can manage windows server by using knife-windows tool and winrm. Ansible also provide support for windows server by some windows modules but it is not sufficient.In existing automation tools chef is good for managing windows server (said by powershell developer). Puppet is old and a liitle bit complex in configuration than chef. Chef and puppet both are agent/server and standalone also. 
 
