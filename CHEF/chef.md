@@ -454,7 +454,6 @@ Arguments:
 :timeout	Use to set a timeout for a command. For example:
 ```
 ####Examples:
-```
 Run a command upon notification:
 ```
 execute "slapadd" do
@@ -513,6 +512,7 @@ cookbook_file "/usr/share/nginx/www/index.html" do
 ```
 Use the execute resource to execute a single command. Commands that are executed with this resource are (by their nature) not idempotent, as they are typically unique to the environment in which they are run. Use not_if and only_if to guard this resource for idempotence.
 Now, approximately all the basic tasks has been done.
+
 You can manage windows server by using knife-windows tool and winrm. Ansible also provide support for windows server by some windows modules but it is not sufficient.In existing automation tools chef is good for managing windows server (said by powershell developer). Puppet is old and a liitle bit complex in configuration than chef. Chef and puppet both are agent/server and standalone also. 
 
 
