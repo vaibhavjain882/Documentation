@@ -106,7 +106,8 @@ Note that keys and values are alternating and you can change each key by issuing
 CONFIG SET timeout 900
 
 ####Databases: Multiple databases:
-Redis has a concept of separated namespaces called "databases". You can select the database number you want to use with "SELECT". By default the database with index 0 is used. So issuing
+Redis has a concept of separated namespaces called "databases". You can select the database number you want to 
+use with "SELECT". By default the database with index 0 is used. So issuing
 
 redis 127.0.0.1:6379> SELECT 1
 
@@ -135,7 +136,9 @@ If you quickly need to set up replication just issue:
 
 SLAVEOF <IP> <port>
 
-on a machine that you want to become slave of the given IP. It will immediately get values from the master. Note that this instance will still be writable. If you want it to be read-only change the redis config file (only available in most recent version, e.g. not on Debian). To revert the slave setting run.
+on a machine that you want to become slave of the given IP. It will immediately get values from the master. 
+Note that this instance will still be writable. If you want it to be read-only change the redis config file 
+(only available in most recent version, e.g. not on Debian). To revert the slave setting run.
 
 SLAVEOF NO ONE
 
