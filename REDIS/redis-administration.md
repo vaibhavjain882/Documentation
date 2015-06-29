@@ -164,7 +164,10 @@ As Redis allows RDB database dumps in background, you can issue a dump at any ti
 
 BGSAVE
 
-When running this command Redis will fork and the new process will dump into the "dbfilename" configured in the Redis configuration without the original process being blocked. Of course the fork itself might cause an interruption. Use "LASTSAVE" to check when the dump file was last updated. For a simple backup solution just backup the dump file. If you need a synchronous save run "SAVE" instead of "BGSAVE".
+When running this command Redis will fork and the new process will dump into the "dbfilename" configured in the 
+Redis configuration without the original process being blocked. Of course the fork itself might cause an interruption. 
+Use "LASTSAVE" to check when the dump file was last updated. For a simple backup solution just backup the dump file. 
+If you need a synchronous save run "SAVE" instead of "BGSAVE".
 
 #### Listing connections:
 
