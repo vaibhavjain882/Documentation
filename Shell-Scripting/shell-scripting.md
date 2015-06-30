@@ -12,7 +12,7 @@
 ```
 
 Example:
-
+```
 if [ -s file ]
 then
     #such and such
