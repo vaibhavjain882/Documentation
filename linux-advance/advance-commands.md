@@ -233,4 +233,7 @@ where:
 -E: for multiple searching
 
 ```
-``` 
+#### Get Public IP of a Linux Host:
+```
+dig +short myip.opendns.com @resolver1.opendns.com
+```
