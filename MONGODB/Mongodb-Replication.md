@@ -57,15 +57,26 @@ In production deployments, you can configure a control script to manage this pro
 use admin
 db.auth("siteRootAdmin", "<password>");
 ```
-8.Initiate the replica set:
+8.Initiate the replica set with following command:
 
 ```
-rs.initiate()
+config = {
+    _id : "my_replica_set",
+     members : [
+         {_id : 0, host : "rs1.example.net:27017"},
+         {_id : 1, host : "rs2.example.net:27017"},
+         {_id : 2, host : "rs3.example.net", arbiterOnly: true},
+     ]
+}
+
+rs.initiate(config)
+
 ```
 9.Verify the initial replica set configuration:
 
 $ rs.conf()
 
+#### YOu can add any replica member in following ways also: 
 10.Add the remaining members to the replica set:
 ```
 rs.add("mongodb1.example.net")
