@@ -1,3 +1,4 @@
+```
 #!/bin/bash
 JavaP=$(ps -C java -O rss | gawk '{ count ++; sum += $2 }; END {count --; print count;}')
 #echo "$JavaP"
@@ -23,3 +24,4 @@ else
 echo "Status Okay" | mail -s "NeoPOC Server Status is OK." -r neopoc@neopoc saurabh.kumar@travenues.com
 fi
 
+```
