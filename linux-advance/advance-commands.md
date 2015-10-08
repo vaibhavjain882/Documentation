@@ -241,3 +241,9 @@ dig +short myip.opendns.com @resolver1.opendns.com
 ```
 dmidecode -s system-serial-number
 ```
+####Command for Sudo help :
+```
+ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no administrator@10.31.32.175
+
+sshpass -pnomore1A-04 ssh -t -o StrictHostKeyChecking=no administrator@10.31.32.175 echo "passwd |"sudo -S dmidecode -s system-serial-number
+```
