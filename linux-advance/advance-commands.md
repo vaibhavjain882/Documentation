@@ -245,5 +245,5 @@ dmidecode -s system-serial-number
 ```
 ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no administrator@10.31.32.175
 
-sshpass -pnomore1A-04 ssh -t -o StrictHostKeyChecking=no administrator@10.31.32.175 echo "passwd |"sudo -S dmidecode -s system-serial-number
+sshpass -ppasswd ssh -t -o StrictHostKeyChecking=no administrator@10.31.32.175 echo "passwd |"sudo -S dmidecode -s system-serial-number
 ```
