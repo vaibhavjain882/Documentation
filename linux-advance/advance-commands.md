@@ -237,3 +237,7 @@ where:
 ```
 dig +short myip.opendns.com @resolver1.opendns.com
 ```
+####Find serial number of linux box:
+```
+dmidecode -s system-serial-number
+```
