@@ -1,3 +1,4 @@
+```
 #!/bin/bash
 
 TotalUsedMemory=$(free -m |gawk '{print $3}' |head -2 |tail -1)
@@ -30,3 +31,4 @@ fi
 fi
 done
 echo -e "Total Used Memory:  $TUM MB \n\nIdle CPU in Percentage: $IdleCpu% \n\nLoad Average:  $LoadAverage \n\nCpu Usage by Tomcat-1: $(cat /tmp/cpu-1.txt)%  \n\nCpu Usage by Tomcat-2: $(cat /tmp/cpu-2.txt)% \n\nAll Disk Usage:  $DiskUsages \n\nStatistics for Tomcat1:\n\n $(cat val-1.txt) \n\nStatistics for Tomcat2:\n\n $(cat val-2.txt) " | mail -a "/tmp/thread-dump-1.txt"  -a "/tmp/thread-dump-2.txt" -s "tomcat Server Status is Critical." -r ldap1@tomcat saurabh.kumar@travenues.com
+```
