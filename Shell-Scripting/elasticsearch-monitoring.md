@@ -1,3 +1,4 @@
+```
 #!/bin/bash
 response=$(curl -s 10.31.33.16:9200/_cat/health |gawk '{print $4}')
 pid=$(ps aux |grep elasticsearch |gawk '{print $2}' |head -1)
@@ -38,3 +39,4 @@ if [ "$S" -eq 0 ] && [ "$flag" -eq 1 ]; then
 echo -e "10.31.33.16 - Elasticssearch Server UP \n\n Memory Used By Elasticsearch: $ElasticPM MB\n\n CPU used by ElasticSearch: $ElasticCU \n\n TotalUsedMemory: $TotalUsedMemory MB\n\n Idle CPU: $CpuUsage \n\n Load Average: $LoadAverage \n\n Disk Usage: $DiskUsage " |mail -s "10.31.33.16 - Elasticssearch Server UP" -r ldap1@elasticsearch saurabh.kumar@travenues.com
 rm -f /tmp/esstatus
 fi
+```
