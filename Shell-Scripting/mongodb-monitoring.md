@@ -19,6 +19,20 @@ MT=$(timeout 5 /usr/bin/mongotop -n 11)
 mongo --eval "printjson(db.serverStatus())" > /tmp/serverstatus
 if [ "$MongoPM" -ge 1000 ] || [ "$MongoCU" -ge 60 ]; then
 echo -e "Total Used Memory: $TotalUsedMemory MB \n\nIdle CPU in Percentage: $CpuUsage% \n\nLoad Average: $LoadAverage \n\nCpu Usage by Mongo: $MongoCU \n\n Memory Usage By Mongo: $MongoPM \n\nAll Disk Usage: $DiskUsage \n\nMongostat Log:\n\n $MS \n\nMongoTop Log: \n\n $MT" | mail -a "/tmp/serverstatus" -s "Mongo Server Status is Critical." -r ldap1@tomcat saurabh.kumar@travenues.com
+echo "0" > /tmp/MongoStatus
+
+echo "0" > /tmp/MongoFlag
+else
+echo "1" > /tmp/MongoFlag
+fi
+S=$(cat /tmp/MongoStatus)
+
+F=$(cat /tmp/MongoFlag)
+
+if [ "$F" -eq 1 ] && [ "$S" -eq 0 ]; then
+echo -e "Total Used Memory: $TotalUsedMemory MB \n\nIdle CPU in Percentage: $CpuUsage% \n\nLoad Average: $LoadAverage \n\nCpu Usage by Mongo: $MongoCU \n\n Memory Usage By Mongo: $MongoPM \n\nAll Disk Usage: $DiskUsage \n\nMongostat Log:\n\n $MS \n\nMongoTop Log: \n\n $MT" | mail -a "/tmp/serverstatus" -s "Mongo Server Status is Okay Now." -r ldap1@tomcat saurabh.kumar@travenues.com
+
+rm -f /tmp/MongoStatus
 fi
 fi
 ```
