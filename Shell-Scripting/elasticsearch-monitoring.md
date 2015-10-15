@@ -17,18 +17,15 @@ echo -e "10.31.33.16 - Elasticssearch Server UP \n\n Memory Used By Elasticsearc
 fi
 
 elif [ "$response" == "red" ] || [ "$ElasticCU" -ge 40 ] || [ "$ElasticPM" -ge 20000 ]; then
-status=0
-echo "$status" > /tmp/esstatus
+echo "0" > /tmp/esstatus
 echo -e "10.31.33.16 - Elasticssearch Server Down\n\n Memory Used By Elasticsearch: $ElasticPM MB\n\n CPU used by ElasticSearch: $ElasticCU \n\n TotalUsedMemory: $TotalUsedMemory MB\n\n CPU Usage: $CpuUsage \n\n Load Average: $LoadAverage \n\n Disk Usage: $DiskUsage" |mail -s "10.31.33.16 - Elasticssearch Server Down" -r ldap1@elasticsearch saurabh.kumar@travenues.com
 
 elif [ "$response" == "yellow" ] || [ "$ElasticCU" -ge 40 ] || [ "$ElasticPM" -ge 20000 ]; then
-status=0
-echo "$status" > /tmp/esstatus
+echo "o" > /tmp/esstatus
 echo -e "10.31.33.16 - shards are allocating \n\n Memory Used By Elasticsearch: $ElasticPM MB\n\n CPU used by ElasticSearch: $ElasticCU \n\n TotalUsedMemory: $TotalUsedMemory MB\n\n CPU Usage: $CpuUsage \n\n Load Average: $LoadAverage \n\n Disk Usage: $DiskUsage " |mail -s "10.31.33.16 - shards are allocating" -r ldap1@elasticsearch saurabh.kumar@travenues.com
 
 elif [ ! $response ] || [ "$ElasticCU" -ge 40 ] || [ "$ElasticPM" -ge 20000 ]; then
-status=0
-echo "$status" > /tmp/esstatus
+echo "0" > /tmp/esstatus
 echo -e "10.31.33.16 - Elasticssearch process is not running \n\n Memory Used By Elasticsearch: $ElasticPM MB\n\n CPU used by ElasticSearch: $ElasticCU \n\n TotalUsedMemory: $TotalUsedMemory MB\n\n Idle CPU: $CpuUsage \n\n Load Average: $LoadAverage \n\n Disk Usage: $DiskUsage " |mail -s "10.31.33.16 - Elasticssearch process is not running" -r ldap1@elasticsearch saurabh.kumar@travenues.com
 fi
 
