@@ -16,7 +16,7 @@ package the VM config and the provisioning setup. It is designed to run on top o
 – VirtualBox, VMWare, AWS, etc. You can integrate Vagrant with CM tools such as Puppet and Chef to 
 provision your own VM setups and configs.
 ```
-### Reasons To Use Docker :
+### Reasons To Use Docker -:
 
 #### 1. Faster Development Life Cycle :
 ```
