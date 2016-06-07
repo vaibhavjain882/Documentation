@@ -119,11 +119,100 @@ sudo bin/plugin install [org]/[user|component]/[version]
  ex: sudo bin/plugin install lmenezes/elasticsearch-kopf
  ```
 #### Color Code for node's health:
-``
+```
 Green = elasticsearch server is up
 Red = elasticsearch server is down
 Yellow = shards are allocating
 ```
 
-#### How to query from elasticsearch.
+#### How to import data into elasticsearch from mysql using JDBC.
+
+1. Download and unzip the elasticsearch-jdbc library.
+```
+wget http://xbib.org/repository/org/xbib/elasticsearch/importer/elasticsearch-jdbc/2.1.0.0/elasticsearch-jdbc-2.1.0.0-dist.zip
+Unzip this and go to it's bin directory.
+```
+2. Create a script to import data from mysql as follows :
+```
+#!/bin/bash
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &amp;amp;amp;amp;&amp;amp;amp;amp; pwd )"
+bin=${DIR}/../bin
+lib=${DIR}/../lib
+ 
+ echo '
+ {
+ "type" : "jdbc",
+ "jdbc" : {
+ "url" : "jdbc:mysql://172.17.0.101:3306/world",
+ "user" : "root",
+ "password" : "password",
+ "sql" : "select anything as _id,anything.name, anything.rollno as roll number, from databasename;",
+ "treat_binary_as_string" : true,
+ "elasticsearch" : {
+ "cluster" : "elasticsearch cluster name",
+ "host" : "172.17.0.101",
+ "port" : 9300
+ },
+ "max_bulk_actions" : 20000,
+ "max_concurrent_bulk_requests" : 10,
+ "index" : "index_name"
+ }
+ }
+ ' | java \
+ -cp "${lib}/*" \
+ -Dlog4j.configurationFile=${bin}/log4j2.xml \
+ org.xbib.tools.Runner \
+ org.xbib.tools.JDBCImporter
+  
+```
+3. Finally execute a query on elasticsearch to verify the indexes:
+```
+curl 'http://localhost:9200/_cat/indices?v'
+```
+4. Retrieve some data to verify
+```
+curl -XGET 'localhost:9200/index_name/_search?size=3&amp;amp;amp;pretty=true'
+```
+
+#### Import data into elasticsearch in mongodb by mongodb-river"
+
+1. Index a collection from mongodb
+```
+curl -XPUT localhost:9200/_river/DATABASE_NAME/_meta -d '{
+  "type": "mongodb",
+    "mongodb": {
+        "servers": [
+	      { "host": "127.0.0.1", "port": 27017 }
+	          ],
+		      "db": "DATABASE_NAME",
+		          "collection": "ACTUAL_COLLECTION_NAME",
+			      "options": { "secondary_read_preference": true },
+			          "gridfs": false
+				    },
+				      "index": {
+				          "name": "ARBITRARY INDEX NAME",
+					      "type": "ARBITRARY TYPE NAME"
+					        }
+						}'
+```
+
+2. Verify your indexes :
+```
+curl -XGET http://localhost:9200/_aliases
+```
+#### Basic Query in elasticsearch:
+query for documents / rows with title field containing 'saurabh'
+```
+curl {endpoint}/_search?q=title:jones&size=5&pretty=true
+```
+Adding some data
+```
+ # Data (argument to -d) should be a JSON document
+     curl -X POST  {endpoint} -d '{
+           "title": "jones",
+	         "amount": 5.7
+		     }'
+```
+
+For complex queries you can use Json, python etc.
 
