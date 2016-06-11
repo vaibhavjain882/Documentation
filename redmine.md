@@ -93,6 +93,7 @@ ENV['RAILS_ENV'] ||= 'production'
 ```
 
 9. Edit httpd.conf
+
 ```
 LoadModule passenger_module /usr/local/lib/ruby/gems/1.8/gems/passenger-3.0.17/ext/apache2/mod_passenger.so
 PassengerRoot /usr/local/lib/ruby/gems/1.8/gems/passenger-3.0.17
@@ -119,9 +120,10 @@ DocumentRoot /home/redmine/redmine/public
 Chown and Chmod files for read/write access for the Apache user
 cd ..
 chown -R apache:apache redmine-1.x
+chmod -R 755 redmine-1.x
 ```
 10. Start all services and use Redmine.
 
-										  chmod -R 755 redmine-1.x 
+
 										   
 										 
