@@ -64,7 +64,9 @@ Note: Docker works on the basis of Daemon-client structure. If you install docke
 
 * Install Docker
 ```
-yum install docker docker-io
+yum install docker-engone
+
+service docker start
 ```
 * Run Docker daemon in background, listening to any ip address on your host on both the network and a unix socket (It should be in your Company's private network otherwise it is vulnerable).
 ```
